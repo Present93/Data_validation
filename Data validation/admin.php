@@ -25,13 +25,7 @@ if(!$_SESSION['username'])
 
     header("Location: new.php");//redirect to login page to secure the welcome page without login access.
 }
- if(isset($_GET['mode']))
-$mode= $_GET['mode'];
-else
-$mode="";
-if(isset($_GET['id']))
-$id= $_GET['id'];
-
+ 
  $data = mysqli_query($dbcon,"SELECT * FROM class ORDER BY name ASC") 
  or die(mysql_error()); 
  Print "<h2>Registered Members</h2><p>"; 
@@ -39,36 +33,20 @@ $id= $_GET['id'];
  Print "<tr><th width=200>Name</th><th width=100>Roll</th><th width=200>Father's Name</th><th width=100>Birth date</th><th width=100>phone number</th><th width=200>Email</th><th width=100>track number</th></tr>";  
  while($info = mysqli_fetch_array( $data )) 
  { 
- Print "<td>".$info['Name'] . "</td> "; 
+ Print "<tr><td>".$info['Name'] . "</td> "; 
  Print "<td>".$info['Roll'] . "</td> "; 
  Print "<td>".$info['F_name'] . "</td> "; 
  Print "<td>".$info['b_day'] . "</td> "; 
  Print "<td>".$info['phone_num'] . "</td> "; 
  Print "<td> <a href=mailto:".$info['email'] . ">" .$info['email'] . "</a></td>"; 
  Print "<td>".$info['track'] . "</td> "; 
- Print "<td><a href=" .$_SERVER['PHP_SELF']. "?id=" . $info['Roll'] ."&mode=Edu>More</a></td></tr>";  
+ Print "<form method='post' action='reg.php'>
+ <td><input type='hidden' name='hroll' value=".$info['Roll']. ">
+ <input type='submit' name='more' value='more'></td>
+</form></tr>";  
  } 
  Print "</table>"; 
 
-if ( $mode=="Edu") 
- {
- $einfo=mysqli_query ($dbcon,"SELECT * FROM education where Roll=$id")
- or die(mysql_error()); 
- Print "<h2>Education Qualification</h2><p>"; 
- Print "<table border cellpadding=3>"; 
- Print "<tr><th width=100>Roll</th><th width=200>School name</th><th width=200>College name</th><th width=100>S.S.C roll</th><th width=100>S.S.C roll</th><th width=50>S.S.C year</th><th width=50>H.S.C year</th><th width=50>S.S.C G.P.A</th><th width=50>H.S.C G.P.A</th></tr>";  
- $ei = mysqli_fetch_array( $einfo );
- Print "<td>".$ei['Roll'] . "</td> "; 
- Print "<td>".$ei['School_name'] . "</td> "; 
- Print "<td>".$ei['College_name'] . "</td> "; 
- Print "<td>".$ei['School_roll'] . "</td> "; 
- Print "<td>".$ei['College_roll'] . "</td> ";  
- Print "<td>".$ei['ssc_year'] . "</td> ";    
- Print "<td>".$ei['hsc_year'] . "</td> ";  
- Print "<td>".$ei['ssc'] . "</td> ";  
- Print "<td>".$ei['hsc'] . "</td> ";
- Print "</table>"; 
- } 
 ?>
 
     </div>  
