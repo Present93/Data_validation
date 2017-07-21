@@ -13,7 +13,7 @@ if(isset($_POST['education']))
     $hsc=$_POST['hsc'];
     $ssc=$_POST['ssc'];
     $roll=$_SESSION['Roll'];
-mysqli_query ($dbcon,"INSERT INTO `education`(`Roll`,`School_name`, `College_name`, `School_roll`, `College_roll`, `ssc_year`, `hsc_year`, `ssc`, `hsc`) VALUES ('$roll',$sname','$cname','$sroll','$croll','$syear','$hyear','$ssc','$hsc')");
+mysqli_query ($dbcon,"INSERT INTO `education`(`Roll`,`School_name`, `College_name`, `School_roll`, `College_roll`, `ssc_year`, `hsc_year`, `ssc`, `hsc`) VALUES ('$roll','$sname','$cname','$sroll','$croll','$syear','$hyear','$ssc','$hsc')");
 echo "Successfully entered";
 
 
