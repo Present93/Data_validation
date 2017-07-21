@@ -4,6 +4,7 @@ session_start();
 
 $yearerror="";
 $rollerror="";
+$sumsg="";
 if(isset($_POST['Register']))
 {
     $name=$_POST['name'];
@@ -25,11 +26,10 @@ if((strlen($roll)!=8)||(is_numeric($roll)!=true))
     $rollerror="Your roll is not valid";
 else{
 $sql=mysqli_query($dbcon,"INSERT INTO `class` (`Name`, `Roll`, `F_name`, `b_day`, `phone_num`, `email`, `track`) VALUES ('$name','$roll' ,'$fname','$date', '$phone', '$email', '$time')");
-//mysqli_query($dbcon,$sql);
-        echo "<script>window.open('edu_qua.php','_self')</script>";
-echo "Successfully registered";
- sleep(5);
+$sumsg = "Successfully registered";
 $_SESSION['Roll']=$roll;
+sleep(3);
+        echo "<script>window.open('edu_qua.php','_self')</script>";
 }
 
  }
@@ -52,27 +52,27 @@ $_SESSION['Roll']=$roll;
     <a href="admin.php">Admin Panel</a>
     </div>
  <nav class="navbar navbar-default">
-    <div class="navbar-header" style="padding: 100px">
+    <div class="navbar-header" style="background-color: #ddd;padding: 50px">
   
  <h2>Registration</h2>
- <p>
+ <h4>
  <form action="date.php" method="post">
- <label>Name:  </label>
+ <p><label>Name:  </label>
 <input type="text" name="name" required title="Please enter your name"><br>
- <label>Roll:  </label>
+ <p><label>Roll:  </label>
  <input type="text" name="Roll" required title="Please enter your roll" ><p><?php echo $rollerror;?></p>
- <label>Birth date:  </label>
+ <p><label>Birth date:  </label>
  <input type="date" name="bday" required title="Please enter your birth date"><p><?php echo $yearerror;?></p>
- <label>Father's Name:  </label>
+<p><label>Father's Name:  </label>
  <input type="text" name="f_name" required title="Please enter your father's name"><br>
- <label>Phone number:  </label>
+ <p><label>Phone number:  </label>
  <input type="text" name="phone" required title="Please enter your phone number"><br>
- <label>Email address:  </label>
+ <p><label>Email address:  </label>
  <input type="email" name="email" required title="Please enter your email"><br>
- <input type="submit" name="Register" value="Register" />
+ <p><input type="submit" name="Register" value="Register" />
  </form> 
-  </p>
-
+  </h4>
+<p><?php echo $sumsg;?><p>
 </div>  
     </nav> 
 </body>
